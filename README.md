@@ -1,1 +1,1 @@
-# -typecho-docker-env
+# typecho-docker-env
