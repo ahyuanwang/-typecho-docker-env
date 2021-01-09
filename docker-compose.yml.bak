@@ -1,0 +1,79 @@
+version: '3'
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      - web
+    restart: always
+  php:
+    build:
+    context: ./custom
+    container_name: php
+    restart: always
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./web:/var/www/html
+    environment:
+      TZ: ${TimeZone}
+    depends_on:
+      - mariadb
+      - redis
+    networks:
+      - web
+    restart: always
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - '80:80'
+      - '8081:8081'
+      - "443:443"
+    volumes:
+      - ./nginx/conf:/etc/nginx/conf.d
+      - ./nginx/ssl:/etc/nginx/cert
+      - ./nginx/logs:/var/log/nginx
+      - ./web:/var/www/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    depends_on:
+      - php
+    networks:
+      - web
+    restart: always
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redis/conf/redis.conf:/etc/redis/redis.conf:rw
+      - ./redis/data:/data:rw
+    command:
+      redis-server /etc/redis/redis.conf --appendonly yes
+    restart: always
+  networks:
+    - web
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    ports:
+      - 8080:80
+      - 8443:443
+    environment:
+      PMA_HOST: mariadb
+    restart: always
+    networks:
+      - web
+networks:
+    web:
+        driver: bridge
