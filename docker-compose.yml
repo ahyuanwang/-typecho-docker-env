@@ -16,8 +16,7 @@ services:
       - web
     restart: always
   php:
-    build:
-    context: ./custom
+    build: ./custom
     container_name: php
     restart: always
     ports:
