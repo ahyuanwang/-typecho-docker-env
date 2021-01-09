@@ -26,7 +26,7 @@ services:
     environment:
       TZ: ${TimeZone}
     depends_on:
-      - mariadb
+      - mysql
       - redis
     networks:
       - web
@@ -69,7 +69,7 @@ services:
       - 8080:80
       - 8443:443
     environment:
-      PMA_HOST: mariadb
+      PMA_HOST: mysql
     restart: always
     networks:
       - web

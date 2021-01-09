@@ -9,13 +9,13 @@ try {
         print 'Error: ' . $e->getMessage() . '<br>';
         die();
 }
-echo '<center><h2>³É¹¦Í¨¹ı PDO Á¬½Óµ½ MySQL ·şÎñÆ÷</h2></center>' . PHP_EOL;
+echo '<center><h2>æˆåŠŸé€šè¿‡ PDO è¿æ¥åˆ° MySQL æœåŠ¡å™¨</h2></center>' . PHP_EOL;
 
 
 $redis = new Redis();
 $result = $redis->connect('redis', 6379);
 if ($result) {
-        echo '<center><h2>³É¹¦Í¨¹ı PHP Á¬½Óµ½ Redis </h2></center>' . PHP_EOL;
+        echo '<center><h2>æˆåŠŸé€šè¿‡ PHP è¿æ¥åˆ° Redis </h2></center>' . PHP_EOL;
 }
 $redis->auth('yourpassword');
 $redis->set('key1', 'val1');
