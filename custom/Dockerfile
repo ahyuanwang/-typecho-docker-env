@@ -1,4 +1,5 @@
 FROM php:latest
+RUN usermod -u 1000 www-data
 
 RUN curl --silent --show-error https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer

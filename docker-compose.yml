@@ -1,8 +1,8 @@
 version: '3'
 services:
-  mariadb:
+  mysql:
     image: mariadb:latest
-    container_name: mariadb
+    container_name: mysql
     ports:
       - '3306:3306'
     volumes:
