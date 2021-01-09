@@ -1,5 +1,4 @@
 FROM php:latest
-RUN usermod -u 1000 www-data
 
 RUN curl --silent --show-error https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer
@@ -32,5 +31,7 @@ RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' >/etc/timezone
 
 RUN printf '[PHP]\ndate.timezone = "Asia/Shanghai"\n' > /usr/local/etc/php/conf.d/tzone.ini
+
+COPY ./php.ini /usr/local/etc/php/conf.d
 
 ENV LANG C.UTF-8	
