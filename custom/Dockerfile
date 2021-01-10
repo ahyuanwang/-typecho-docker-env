@@ -32,6 +32,6 @@ RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 
 RUN printf '[PHP]\ndate.timezone = "Asia/Shanghai"\n' > /usr/local/etc/php/conf.d/tzone.ini
 
-RUN printf '[PHP]\noutput_buffering =on\n' > /usr/local/etc/php/conf.d/php.ini
+COPY php.ini /usr/local/etc/php/conf.d/php.ini
 
 ENV LANG C.UTF-8	
