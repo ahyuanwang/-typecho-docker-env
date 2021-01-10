@@ -31,7 +31,7 @@ MYSQL_PASSWORD=RW5zCvhKG4cF69q6dw
 
 ## 修改redis配置
 
-typecho-docker-env/reids/conf/redis.conf
+typecho-docker-env/redis/conf/redis.conf
 
 ```
 requirepass yourpassword
